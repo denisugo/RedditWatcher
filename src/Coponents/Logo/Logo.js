@@ -4,7 +4,7 @@ import logo from "../../assets/logo128.png";
 
 function Logo(props) {
   return (
-    <div className="logo" data-test="logo">
+    <div className="logo" data-testid="logo">
       <img alt="logo" src={logo} data-test="img" />
       <h1>
         <span>Reddit</span>Watcher

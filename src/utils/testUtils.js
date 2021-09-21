@@ -6,6 +6,6 @@ export const setUp = (Component, props) => {
 };
 
 export const findByDataTest = (attr, wrapper) => {
-  const element = wrapper.find(`[data-test='${attr}']`);
+  const element = wrapper.find(`[data-testid='${attr}']`);
   return element;
 };

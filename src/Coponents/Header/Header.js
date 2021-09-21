@@ -6,7 +6,7 @@ import Logo from "../Logo/Logo";
 
 function Header(props) {
   return (
-    <div className="header" data-test="header">
+    <div className="header" data-testid="header">
       <Logo />
       <SearchBar />
     </div>
