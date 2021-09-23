@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "identity-obj-proxy": "^3.0.0"
+    "identity-obj-proxy": "^3.0.0",
+    "jest-fetch-mock": "^3.0.3"
   }
 }

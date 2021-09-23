@@ -33,13 +33,17 @@
   margin: 10px 0 0 0;
 }
 
-.post-content h3 {
+/* Post content */
+.post-content h3,
+.post-content h4 {
   margin: 0;
   align-self: flex-start;
   margin: 5px;
+  text-align: left;
 }
-/* Post content */
-.post-content img {
+
+.post-content img,
+.post-content video {
   width: 100%;
   height: auto;
   object-fit: contain;

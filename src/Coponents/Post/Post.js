@@ -5,11 +5,25 @@ import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faCommentAlt } from "@fortawesome/free-regular-svg-icons";
 
 import "./Post.css";
-import Mock from "../../assets/mock.jpg";
 import Comments from "../Comments/Comments";
+import { fixUrl, getDate } from "../../utils/utils";
 
-function Post(props) {
-  //   Styling objects
+function Post({
+  user,
+  date,
+  upvotes,
+  subreddit,
+  comments,
+  text,
+  title,
+  images,
+  video,
+}) {
+  const dateString = getDate(date);
+
+  const fullName = `${user} (${subreddit})`;
+
+  // Styling objects
   // Olny handling mouse enter and mouse leave events
   const [colorArrowUp, setColorArrowUp] = useState("#706F6F");
   const [colorArrowDown, setColorArrowDown] = useState("#706F6F");
@@ -24,7 +38,7 @@ function Post(props) {
   const handleMouseEnterArrowComment = () => setColorComment("#de551f");
   const handleMouseLeaveArrowComment = () => setColorComment("#706F6F");
 
-  //   Handle clicks
+  // Handle clicks
   const [showComments, setShowComments] = useState(false);
 
   const handleOnClickComment = () => {
@@ -34,11 +48,26 @@ function Post(props) {
 
   return (
     <div className="post" data-testid="post">
-      <h2>User name</h2>
-      <p className="date">19.09.2021</p>
+      <h2>{fullName}</h2>
+      <p className="date">{dateString}</p>
       <div className="post-content">
-        <h3>This is really funny)))</h3>
-        <img src={Mock} alt="Post content" />
+        <h3>{title}</h3>
+        <h4>{text}</h4>
+        {images &&
+          images.map((image, index) => (
+            <img
+              key={index}
+              src={fixUrl(image.source.url)}
+              alt="Post content"
+              data-testid={"post-image-" + index}
+            />
+          ))}
+        {video && (
+          <video loop autoPlay muted data-testid="video">
+            <source src={video} />
+            Sorry, your browser doesn't support embedded videos.
+          </video>
+        )}
         <hr />
       </div>
       <div className="up-down-comment">
@@ -54,7 +83,7 @@ function Post(props) {
             onMouseLeave={handleMouseLeaveArrowUp}
           />
 
-          <p>123</p>
+          <p>{upvotes}</p>
 
           <FontAwesomeIcon
             className="arrow-down"
@@ -79,7 +108,7 @@ function Post(props) {
             onMouseLeave={handleMouseLeaveArrowComment}
             onClick={handleOnClickComment}
           />
-          <p>334</p>
+          <p>{comments}</p>
         </div>
       </div>
       {showComments && <Comments data-testid="comments" />}
