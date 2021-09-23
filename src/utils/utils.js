@@ -3,6 +3,7 @@ export const fixUrl = (url) => {
 };
 
 export const getDate = (date) => {
+  if (!date) return null;
   date *= 1000;
   const currentDate = Date.now();
   const second = 1000;

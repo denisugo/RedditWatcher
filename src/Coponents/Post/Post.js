@@ -19,7 +19,7 @@ function Post({
   images,
   video,
 }) {
-  const dateString = getDate(date);
+  date = getDate(date);
 
   const fullName = `${user} (${subreddit})`;
 
@@ -49,7 +49,7 @@ function Post({
   return (
     <div className="post" data-testid="post">
       <h2>{fullName}</h2>
-      <p className="date">{dateString}</p>
+      <p className="date">{date}</p>
       <div className="post-content">
         <h3>{title}</h3>
         <h4>{text}</h4>
@@ -111,7 +111,12 @@ function Post({
           <p>{comments}</p>
         </div>
       </div>
-      {showComments && <Comments data-testid="comments" />}
+      {showComments && (
+        <Comments
+          data-testid="comments"
+          url="/r/PublicFreakout/comments/ptuyci/antimasker_gets_owned/"
+        />
+      )}
     </div>
   );
 }

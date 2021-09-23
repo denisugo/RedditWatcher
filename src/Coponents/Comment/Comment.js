@@ -1,6 +1,8 @@
 import React from "react";
+import { getDate } from "../../utils/utils";
 
 function Comment({ user, date, content }) {
+  date = getDate(date);
   return (
     <div className="comment" data-testid="comment">
       <h3>{user}</h3>

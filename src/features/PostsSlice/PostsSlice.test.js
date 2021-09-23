@@ -6,15 +6,17 @@ import {
 } from "./PostsSlice";
 import posts from "./PostsSlice";
 import { configureStore } from "@reduxjs/toolkit";
-import { waitForElement } from "@testing-library/react";
-
-const store = configureStore({
-  reducer: {
-    posts: posts,
-  },
-});
 
 describe("PostsSlice", () => {
+  let store;
+  beforeEach(() => {
+    store = configureStore({
+      reducer: {
+        posts: posts,
+      },
+    });
+  });
+
   describe("Initial states", () => {
     it("Should select posts", () => {
       const posts = selectPosts(store.getState());
@@ -48,11 +50,16 @@ describe("PostsSlice", () => {
 
       //   console.log(payload);
       //   expect(posts).toBe(2);
-      store.dispatch(fetchPosts()).then(() => {
-        const posts = selectPosts(store.getState());
 
-        return expect(JSON.stringify(posts)).toBe(JSON.stringify(output));
-      });
+      //   store.dispatch(fetchPosts()).then(() => {
+      //     const posts = selectPosts(store.getState());
+
+      //     return expect(JSON.stringify(posts)).toBe(JSON.stringify(output));
+      //   });
+
+      await store.dispatch(fetchPosts());
+      const posts = selectPosts(store.getState());
+      expect(JSON.stringify(posts)).toBe(JSON.stringify(output));
     });
 
     it("Should fetch new posts, but server is not ok", async () => {
@@ -60,21 +67,17 @@ describe("PostsSlice", () => {
         ok: false,
         json: () => ({ data: { children: output } }),
       });
-
-      store.dispatch(fetchPosts()).then(() => {
-        const posts = selectPosts(store.getState());
-
-        return expect(JSON.stringify(posts)).toBe(JSON.stringify([]));
-      });
+      await store.dispatch(fetchPosts());
+      const posts = selectPosts(store.getState());
+      expect(JSON.stringify(posts)).toBe(JSON.stringify([]));
     });
 
     it("Should set error to true", async () => {
       fetch.mockRejectedValueOnce({});
 
-      store.dispatch(fetchPosts()).then(() => {
-        const error = selectPostsError(store.getState());
-        return expect(error).toBe(true);
-      });
+      await store.dispatch(fetchPosts());
+      const posts = selectPosts(store.getState());
+      expect(JSON.stringify(posts)).toBe(JSON.stringify([]));
     });
   });
 });
