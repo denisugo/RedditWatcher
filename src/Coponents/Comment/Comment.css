@@ -1,0 +1,34 @@
+/* Common */
+.comment {
+  width: 90%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* align-items: center; */
+  justify-content: center;
+  background-color: #fbfbfb;
+  margin: 5px 0;
+}
+
+/* User */
+.comment .user {
+  color: #1496df;
+  margin: 5px 10px 0;
+  align-self: flex-start;
+}
+
+/* Date */
+.comment .date {
+  color: #706f6f;
+  margin: 0 10px 5px 10px;
+  align-self: flex-end;
+}
+
+/* Content */
+.comment .content {
+  color: #706f6f;
+  margin: 5px 10px;
+  align-self: flex-start;
+}

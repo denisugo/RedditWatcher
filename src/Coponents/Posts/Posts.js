@@ -36,6 +36,7 @@ function Posts(props) {
         return (
           <Post
             key={post.data.id}
+            id={post.data.id}
             user={post.data.author}
             subreddit={post.data.subreddit_name_prefixed}
             date={post.data.created}
@@ -45,6 +46,7 @@ function Posts(props) {
             video={video}
             upvotes={post.data.ups}
             comments={post.data.num_comments}
+            permalink={post.data.permalink}
           />
         );
       })}

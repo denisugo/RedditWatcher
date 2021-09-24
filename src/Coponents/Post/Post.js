@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +7,8 @@ import { faCommentAlt } from "@fortawesome/free-regular-svg-icons";
 import "./Post.css";
 import Comments from "../Comments/Comments";
 import { fixUrl, getDate } from "../../utils/utils";
+import { useDispatch } from "react-redux";
+import { deleteComments } from "../../features/CommentsSlice/CommentsSlice";
 
 function Post({
   user,
@@ -18,6 +20,8 @@ function Post({
   title,
   images,
   video,
+  permalink,
+  id,
 }) {
   date = getDate(date);
 
@@ -25,25 +29,44 @@ function Post({
 
   // Styling objects
   // Olny handling mouse enter and mouse leave events
-  const [colorArrowUp, setColorArrowUp] = useState("#706F6F");
-  const [colorArrowDown, setColorArrowDown] = useState("#706F6F");
-  const [colorComment, setColorComment] = useState("#706F6F");
 
-  const handleMouseEnterArrowUp = () => setColorArrowUp("#de551f");
-  const handleMouseLeaveArrowUp = () => setColorArrowUp("#706F6F");
+  const [styleArrowUp, setStyleArrowUp] = useState({
+    color: "#706F6F",
+    backgroundColor: null,
+  });
+  const [styleArrowDown, setStyleArrowDown] = useState({
+    color: "#706F6F",
+    backgroundColor: null,
+  });
+  const [styleComment, setStyleComment] = useState({
+    color: "#706F6F",
+    backgroundColor: null,
+  });
 
-  const handleMouseEnterArrowDown = () => setColorArrowDown("#de551f");
-  const handleMouseLeaveArrowDown = () => setColorArrowDown("#706F6F");
+  const handleMouseEnterArrowUp = () =>
+    setStyleArrowUp({ color: "#de551f", backgroundColor: "#dfdfdf" });
+  const handleMouseLeaveArrowUp = () =>
+    setStyleArrowUp({ color: "#706F6F", backgroundColor: null });
 
-  const handleMouseEnterArrowComment = () => setColorComment("#de551f");
-  const handleMouseLeaveArrowComment = () => setColorComment("#706F6F");
+  const handleMouseEnterArrowDown = () =>
+    setStyleArrowDown({ color: "#de551f", backgroundColor: "#dfdfdf" });
+  const handleMouseLeaveArrowDown = () =>
+    setStyleArrowDown({ color: "#706F6F", backgroundColor: null });
+
+  const handleMouseEnterArrowComment = () =>
+    setStyleComment({ color: "#de551f", backgroundColor: "#dfdfdf" });
+  const handleMouseLeaveArrowComment = () =>
+    setStyleComment({ color: "#706F6F", backgroundColor: null });
 
   // Handle clicks
   const [showComments, setShowComments] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOnClickComment = () => {
-    if (showComments) setShowComments(false);
-    else setShowComments(true);
+    if (showComments) {
+      dispatch(deleteComments(id));
+      setShowComments(false);
+    } else setShowComments(true);
   };
 
   return (
@@ -77,7 +100,7 @@ function Post({
             role="button"
             icon={faArrowUp}
             size={"1x"}
-            style={{ color: colorArrowUp }}
+            style={styleArrowUp}
             data-testid="arrow-up"
             onMouseEnter={handleMouseEnterArrowUp}
             onMouseLeave={handleMouseLeaveArrowUp}
@@ -90,32 +113,27 @@ function Post({
             role="button"
             icon={faArrowDown}
             size={"1x"}
-            style={{ color: colorArrowDown }}
+            style={styleArrowDown}
             data-testid="arrow-down"
             onMouseEnter={handleMouseEnterArrowDown}
             onMouseLeave={handleMouseLeaveArrowDown}
           />
         </div>
-        <div className="comment-section">
-          <FontAwesomeIcon
-            className="comment-button"
-            role="button"
-            icon={faCommentAlt}
-            size={"1x"}
-            style={{ color: colorComment }}
-            data-testid="comment-button"
-            onMouseEnter={handleMouseEnterArrowComment}
-            onMouseLeave={handleMouseLeaveArrowComment}
-            onClick={handleOnClickComment}
-          />
+        <div
+          className="comment-button"
+          role="button"
+          onMouseEnter={handleMouseEnterArrowComment}
+          onMouseLeave={handleMouseLeaveArrowComment}
+          onClick={handleOnClickComment}
+          data-testid="comment-button"
+          style={styleComment}
+        >
+          <FontAwesomeIcon icon={faCommentAlt} size={"1x"} />
           <p>{comments}</p>
         </div>
       </div>
       {showComments && (
-        <Comments
-          data-testid="comments"
-          url="/r/PublicFreakout/comments/ptuyci/antimasker_gets_owned/"
-        />
+        <Comments data-testid="comments" url={permalink} id={id} />
       )}
     </div>
   );

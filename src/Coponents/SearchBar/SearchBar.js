@@ -23,7 +23,7 @@ function SearchBar(props) {
       onMouseLeave={onMouseLeaveHandler}
     >
       <FontAwesomeIcon icon={faSearch} size={"2x"} color="#706F6F" />
-      <input type="search" name="term" placeholder="Search" />
+      <input type="search" name="term" placeholder="Search" role="search" />
     </div>
   );
 }

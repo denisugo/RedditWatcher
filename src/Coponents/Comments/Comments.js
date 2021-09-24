@@ -1,50 +1,46 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./Comments.css";
+
 import {
   fetchComments,
   selectComments,
+  selectCommentsLoading,
 } from "../../features/CommentsSlice/CommentsSlice";
 import Comment from "../Comment/Comment";
+import CommentsLoader from "../Loaders/CommentsLoader/CommentsLoader";
 
-// const comments = [
-//   {
-//     user: "Dave",
-//     date: "2 days ago",
-//     content: "Nice joke, dude",
-//     id: 1001,
-//   },
-//   {
-//     user: "HiddenWallet2000",
-//     date: "2 weeks ago",
-//     content: "Really cool",
-//     id: 192,
-//   },
-//   {
-//     user: "Martin",
-//     date: "10.08.2019",
-//     content: "How dark it is?",
-//     id: 12,
-//   },
-// ];
-
-function Comments({ url }) {
+function Comments({ url, id }) {
   const dispatch = useDispatch();
-  const comments = useSelector(selectComments);
+  const comments = useSelector(selectComments)[id];
 
   useEffect(() => {
-    dispatch(fetchComments(url));
-  }, [dispatch, url]);
+    dispatch(fetchComments({ url, id }));
+  }, [dispatch, url, id]);
 
+  const isLoading = useSelector(selectCommentsLoading);
   return (
     <div className="comments" data-testid="comments">
-      {comments.map((comment) => (
-        <Comment
-          key={comment.data.id}
-          user={comment.data.author}
-          date={comment.data.created}
-          content={comment.data.body}
-        />
-      ))}
+      {comments &&
+        comments.map((comment) => {
+          if (comment.data.body)
+            return (
+              <Comment
+                key={comment.data.id}
+                user={comment.data.author}
+                date={comment.data.created}
+                content={comment.data.body}
+              />
+            );
+          return null;
+        })}
+      {isLoading && (
+        <div className="loader" data-testid="loader">
+          <CommentsLoader />
+          <CommentsLoader />
+          <CommentsLoader />
+        </div>
+      )}
     </div>
   );
 }

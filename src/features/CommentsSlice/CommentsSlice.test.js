@@ -1,4 +1,5 @@
 import {
+  deleteComments,
   fetchComments,
   selectComments,
   selectCommentsError,
@@ -20,7 +21,7 @@ describe("Comment Slice", () => {
   describe("Initial states", () => {
     it("Should select comments", () => {
       const comments = selectComments(store.getState());
-      expect(JSON.stringify(comments)).toBe(JSON.stringify([]));
+      expect(JSON.stringify(comments)).toBe(JSON.stringify({}));
     });
 
     it("Should select error", () => {
@@ -35,6 +36,7 @@ describe("Comment Slice", () => {
   });
 
   describe("Fetch comments", () => {
+    const id = 1;
     const output = [["comment1", "comment2"]];
     const url = "mock.com/url";
 
@@ -48,9 +50,9 @@ describe("Comment Slice", () => {
         json: () => [{}, { data: { children: output } }],
       });
 
-      await store.dispatch(fetchComments(url));
+      await store.dispatch(fetchComments({ url, id }));
       const comments = selectComments(store.getState());
-      expect(JSON.stringify(comments)).toBe(JSON.stringify(output));
+      expect(JSON.stringify(comments[id])).toBe(JSON.stringify(output));
     });
 
     it("Should fetch comments, but server is not ok", async () => {
@@ -59,9 +61,9 @@ describe("Comment Slice", () => {
         json: () => [{}, { data: { children: output } }],
       });
 
-      await store.dispatch(fetchComments(url));
+      await store.dispatch(fetchComments({ url, id }));
       const comments = selectComments(store.getState());
-      expect(JSON.stringify(comments)).toBe(JSON.stringify([]));
+      expect(JSON.stringify(comments)).toBe(JSON.stringify({}));
     });
 
     it("Should set error to true", async () => {
@@ -70,6 +72,31 @@ describe("Comment Slice", () => {
       await store.dispatch(fetchComments(url));
       const error = selectCommentsError(store.getState());
       expect(error).toBe(true);
+    });
+  });
+
+  describe("Delete comments", () => {
+    const id = 1;
+    const output = [["comment1", "comment2"]];
+    const url = "mock.com/url";
+
+    beforeEach(() => {
+      fetch.resetMocks();
+    });
+
+    it("Should delete comments", async () => {
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => [{}, { data: { children: output } }],
+      });
+
+      await store.dispatch(fetchComments({ url, id }));
+      let comments = selectComments(store.getState());
+      expect(JSON.stringify(comments[id])).toBe(JSON.stringify(output));
+
+      store.dispatch(deleteComments(id));
+      comments = selectComments(store.getState());
+      expect(JSON.stringify(comments)).toBe(JSON.stringify({}));
     });
   });
 });
