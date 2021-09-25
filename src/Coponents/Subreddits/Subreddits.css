@@ -1,0 +1,16 @@
+.subreddits {
+  width: 25%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 10px #b7e0f7;
+  padding-bottom: 20px;
+}
+
+.subreddits-title {
+  font-size: 1.5rem;
+  color: #2b2b2b;
+  margin: 10px;
+}

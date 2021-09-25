@@ -1,0 +1,13 @@
+.mock-posts {
+}
+
+.mock-post {
+  width: 60%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  box-shadow: 0 3px 10px #b7e0f7;
+}

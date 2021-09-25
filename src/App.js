@@ -3,6 +3,9 @@ import React from "react";
 import "./App.css";
 import Header from "./Coponents/Header/Header";
 import Posts from "./Coponents/Posts/Posts";
+import Subreddit from "./Coponents/Subreddit/Subreddit";
+import science from "./assets/subredditsIcons/science.png";
+import Subreddits from "./Coponents/Subreddits/Subreddits";
 
 function App() {
   return (
@@ -11,7 +14,7 @@ function App() {
         <Header />
       </header>
       <main>
-        <Posts />
+        <Subreddits />
       </main>
     </div>
   );

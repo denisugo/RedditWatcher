@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./Posts.css";
 
-import { fetchPosts, selectPosts } from "../../features/PostsSlice/PostsSlice";
+import {
+  fetchPosts,
+  selectPosts,
+  selectPostsLoading,
+} from "../../features/PostsSlice/PostsSlice";
+import PostsLoader from "../Loaders/PostsLoader/PostsLoader";
 import Post from "../Post/Post";
 
 function Posts(props) {
@@ -11,6 +17,8 @@ function Posts(props) {
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
+
+  const isLoading = useSelector(selectPostsLoading);
 
   return (
     <div className="posts" data-testid="posts">
@@ -50,6 +58,20 @@ function Posts(props) {
           />
         );
       })}
+
+      {isLoading && (
+        <div className="mock-posts">
+          <div className="mock-post">
+            <PostsLoader />
+          </div>
+          <div className="mock-post">
+            <PostsLoader />
+          </div>
+          <div className="mock-post">
+            <PostsLoader />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
