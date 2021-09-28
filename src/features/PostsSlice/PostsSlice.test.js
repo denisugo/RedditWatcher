@@ -34,8 +34,9 @@ describe("PostsSlice", () => {
 
   describe("Fetch posts", () => {
     const output = [["post1", "post2"]];
+    const subreddit = "r/mock";
 
-    beforeEach(() => {
+    afterEach(() => {
       fetch.resetMocks();
     });
 
@@ -44,18 +45,6 @@ describe("PostsSlice", () => {
         ok: true,
         json: () => ({ data: { children: output } }),
       });
-
-      //   const posts = fetchPosts();
-      //   const payload = (await posts(jest.fn(() => {}))).payload;
-
-      //   console.log(payload);
-      //   expect(posts).toBe(2);
-
-      //   store.dispatch(fetchPosts()).then(() => {
-      //     const posts = selectPosts(store.getState());
-
-      //     return expect(JSON.stringify(posts)).toBe(JSON.stringify(output));
-      //   });
 
       await store.dispatch(fetchPosts());
       const posts = selectPosts(store.getState());
@@ -67,7 +56,7 @@ describe("PostsSlice", () => {
         ok: false,
         json: () => ({ data: { children: output } }),
       });
-      await store.dispatch(fetchPosts());
+      await store.dispatch(fetchPosts(subreddit));
       const posts = selectPosts(store.getState());
       expect(JSON.stringify(posts)).toBe(JSON.stringify([]));
     });
@@ -75,7 +64,7 @@ describe("PostsSlice", () => {
     it("Should set error to true", async () => {
       fetch.mockRejectedValueOnce({});
 
-      await store.dispatch(fetchPosts());
+      await store.dispatch(fetchPosts(subreddit));
       const posts = selectPosts(store.getState());
       expect(JSON.stringify(posts)).toBe(JSON.stringify([]));
     });

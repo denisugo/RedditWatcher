@@ -38,7 +38,7 @@ describe("Homepage", () => {
   let wrapper;
 
   beforeEach(() => {
-    fetch.mockResolvedValueOnce({
+    fetch.mockResolvedValue({
       ok: true,
       json: () => ({ data: { children: output } }),
     });

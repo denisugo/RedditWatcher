@@ -57,6 +57,12 @@ function Posts({ isLoading, posts, isError }) {
           </div>
         </div>
       )}
+
+      {isError && (
+        <div className="error-message" data-testid="error-message">
+          <h2>Error fetching posts, try to reload this page</h2>
+        </div>
+      )}
     </div>
   );
 }

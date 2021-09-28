@@ -23,31 +23,31 @@ const commentsSlice = createSlice({
     error: false,
   },
   reducers: {
-    deleteComments: (store, action) => {
-      delete store.comments[action.payload];
+    deleteComments: (state, action) => {
+      delete state.comments[action.payload];
     },
   },
   extraReducers: {
-    [fetchComments.pending]: (store, action) => {
-      store.loading = true;
-      store.error = false;
+    [fetchComments.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
     },
-    [fetchComments.fulfilled]: (store, action) => {
-      store.loading = false;
-      store.error = false;
-      store.comments[action.payload.id] = action.payload.data;
+    [fetchComments.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.comments[action.payload.id] = action.payload.data;
     },
-    [fetchComments.rejected]: (store, action) => {
-      store.loading = false;
-      store.error = true;
+    [fetchComments.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
       // console.log("Error message: ", action.error.message);
     },
   },
 });
 
-export const selectComments = (store) => store.comments.comments;
-export const selectCommentsLoading = (store) => store.comments.loading;
-export const selectCommentsError = (store) => store.comments.error;
+export const selectComments = (state) => state.comments.comments;
+export const selectCommentsLoading = (state) => state.comments.loading;
+export const selectCommentsError = (state) => state.comments.error;
 
 export const { deleteComments } = commentsSlice.actions;
 export default commentsSlice.reducer;

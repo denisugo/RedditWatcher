@@ -50,4 +50,16 @@ describe("Posts", () => {
     const mockElement = findByDataTest("mock-posts", wrapper);
     expect(mockElement.length).toBe(1);
   });
+  it("Should render error message", () => {
+    const wrapper = setUpRedux(Posts, {
+      posts: emptyPosts,
+      isLoading: false,
+      isError: true,
+    });
+    const element = findByDataTest("post", wrapper);
+    expect(element.length).toBe(0);
+
+    const errorElement = findByDataTest("error-message", wrapper);
+    expect(errorElement.length).toBe(1);
+  });
 });

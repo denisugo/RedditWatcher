@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const url = "https://www.reddit.com/r/popular.json";
+export const fetchPosts = createAsyncThunk(
+  "posts/fetchPosts",
+  async (subreddit) => {
+    const url = `https://www.reddit.com/${subreddit}.json`;
+    const response = await fetch(url);
 
-export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const response = await fetch(url);
-
-  let posts;
-  if (response.ok) {
-    posts = await response.json();
-    return posts.data.children;
-  } else return [];
-});
+    let posts;
+    if (response.ok) {
+      posts = await response.json();
+      return posts.data.children;
+    } else return [];
+  }
+);
 
 const postsSlice = createSlice({
   name: "posts",
@@ -24,6 +26,7 @@ const postsSlice = createSlice({
     [fetchPosts.pending]: (state, action) => {
       state.loading = true;
       state.error = false;
+      state.posts = [];
     },
     [fetchPosts.fulfilled]: (state, action) => {
       state.loading = false;
@@ -38,8 +41,8 @@ const postsSlice = createSlice({
   },
 });
 
-export const selectPosts = (store) => store.posts.posts;
-export const selectPostsLoading = (store) => store.posts.loading;
-export const selectPostsError = (store) => store.posts.error;
+export const selectPosts = (state) => state.posts.posts;
+export const selectPostsLoading = (state) => state.posts.loading;
+export const selectPostsError = (state) => state.posts.error;
 
 export default postsSlice.reducer;

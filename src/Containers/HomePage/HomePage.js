@@ -11,6 +11,7 @@ import {
   selectPostsLoading,
 } from "../../features/PostsSlice/PostsSlice";
 import {
+  changeSubreddit,
   selectSelectedSubreddit,
   selectSubreddits,
 } from "../../features/SubredditsSlice/SubredditsSlice";
@@ -18,30 +19,29 @@ import {
 function HomePage(props) {
   const dispatch = useDispatch();
 
+  // Subreddits logic
+  const subreddits = useSelector(selectSubreddits);
+  const selectedSubreddit = useSelector(selectSelectedSubreddit);
+
+  const setSelectedSubreddit = (payload) => dispatch(changeSubreddit(payload));
+
   // Posts logic
   const posts = useSelector(selectPosts);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    dispatch(fetchPosts(selectedSubreddit));
+  }, [dispatch, selectedSubreddit]);
 
   const isLoadingPosts = useSelector(selectPostsLoading);
   const isErrorPosts = useSelector(selectPostsError);
 
-  // Subreddits logic
-  const subreddits = useSelector(selectSubreddits);
-  // replace by changeSubbreddit and useeffect
-  const [selectedSubreddit, setSelectedSubreddit] = useState(
-    useSelector(selectSelectedSubreddit)
-  );
-
   return (
     <div className="homepage" data-testid="homepage">
       <Posts
-        isLoading={isLoadingPosts}
-        posts={posts}
-        isError={isErrorPosts}
         data-testid="posts"
+        isLoading={isLoadingPosts}
+        isError={isErrorPosts}
+        posts={posts}
       />
       <Subreddits
         subreddits={subreddits}

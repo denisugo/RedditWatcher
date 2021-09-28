@@ -1,12 +1,9 @@
 import React from "react";
-
 import "./App.css";
+
 import Header from "./Coponents/Header/Header";
-import Posts from "./Coponents/Posts/Posts";
-import Subreddit from "./Coponents/Subreddit/Subreddit";
-import science from "./assets/subredditsIcons/science.png";
-import Subreddits from "./Coponents/Subreddits/Subreddits";
 import HomePage from "./Containers/HomePage/HomePage";
+import Footer from "./Coponents/Footer/Footer";
 
 function App() {
   return (
@@ -17,6 +14,9 @@ function App() {
       <main>
         <HomePage />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

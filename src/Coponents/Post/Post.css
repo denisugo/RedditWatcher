@@ -40,6 +40,8 @@
   align-self: flex-start;
   margin: 5px;
   text-align: left;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .post-content img,
