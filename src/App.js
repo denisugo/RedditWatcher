@@ -6,6 +6,7 @@ import Posts from "./Coponents/Posts/Posts";
 import Subreddit from "./Coponents/Subreddit/Subreddit";
 import science from "./assets/subredditsIcons/science.png";
 import Subreddits from "./Coponents/Subreddits/Subreddits";
+import HomePage from "./Containers/HomePage/HomePage";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Header />
       </header>
       <main>
-        <Subreddits />
+        <HomePage />
       </main>
     </div>
   );

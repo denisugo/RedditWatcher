@@ -1,12 +1,14 @@
 .subreddits {
   width: 25%;
-  height: auto;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   box-shadow: 0 3px 10px #b7e0f7;
   padding-bottom: 20px;
+  margin: 20px 0;
+  border-radius: 2px;
 }
 
 .subreddits-title {

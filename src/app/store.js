@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import posts from "../features/PostsSlice/PostsSlice";
-import comments from "../features/CommentsSlice/CommentsSlice";
+import postsSlice from "../features/PostsSlice/PostsSlice";
+import commentsSlice from "../features/CommentsSlice/CommentsSlice";
+import subredditsSlice from "../features/SubredditsSlice/SubredditsSlice";
 
 export const store = configureStore({
   reducer: {
-    posts: posts,
-    comments: comments,
+    posts: postsSlice,
+    comments: commentsSlice,
+    subreddits: subredditsSlice,
   },
 });

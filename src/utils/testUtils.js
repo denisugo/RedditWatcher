@@ -1,9 +1,10 @@
 import { shallow, mount } from "enzyme";
 
 import { Provider } from "react-redux";
-import posts from "../features/PostsSlice/PostsSlice";
-import comments from "../features/CommentsSlice/CommentsSlice";
+import postsSlice from "../features/PostsSlice/PostsSlice";
+import commentsSlice from "../features/CommentsSlice/CommentsSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import subredditsSlice from "../features/SubredditsSlice/SubredditsSlice";
 
 export const setUp = (Component, props) => {
   const wrapper = shallow(<Component {...props} />);
@@ -12,8 +13,9 @@ export const setUp = (Component, props) => {
 export const setUpRedux = (Component, props) => {
   const store = configureStore({
     reducer: {
-      posts: posts,
-      comments: comments,
+      posts: postsSlice,
+      comments: commentsSlice,
+      subreddits: subredditsSlice,
     },
   });
 

@@ -33,6 +33,7 @@ const postsSlice = createSlice({
     [fetchPosts.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
+      // console.log("Error message: ", action.error.message);
     },
   },
 });

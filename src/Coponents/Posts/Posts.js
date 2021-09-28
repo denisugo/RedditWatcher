@@ -1,25 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./Posts.css";
 
-import {
-  fetchPosts,
-  selectPosts,
-  selectPostsLoading,
-} from "../../features/PostsSlice/PostsSlice";
 import PostsLoader from "../Loaders/PostsLoader/PostsLoader";
 import Post from "../Post/Post";
 
-function Posts(props) {
-  const dispatch = useDispatch();
-  const posts = useSelector(selectPosts);
-
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
-
-  const isLoading = useSelector(selectPostsLoading);
-
+function Posts({ isLoading, posts, isError }) {
   return (
     <div className="posts" data-testid="posts">
       {posts.map((post) => {
@@ -60,7 +45,7 @@ function Posts(props) {
       })}
 
       {isLoading && (
-        <div className="mock-posts">
+        <div className="mock-posts" data-testid="mock-posts">
           <div className="mock-post">
             <PostsLoader />
           </div>

@@ -6,6 +6,7 @@
   justify-content: flex-start;
   overflow: hidden;
   margin: 7px;
+  border-radius: 2px;
 }
 
 .subreddit img {
@@ -41,5 +42,9 @@
 
 /* Hovered style */
 .subreddit-hovered {
-  background-color: #bfbfbf;
+  background-color: #dfdfdf;
+}
+
+.subreddit-hovered img {
+  border: 3px solid #706f6f;
 }
