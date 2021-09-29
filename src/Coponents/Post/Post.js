@@ -86,7 +86,7 @@ function Post({
             />
           ))}
         {video && (
-          <video loop autoPlay muted data-testid="video">
+          <video loop autoPlay muted controls data-testid="video">
             <source src={video} />
             Sorry, your browser doesn't support embedded videos.
           </video>
@@ -122,9 +122,15 @@ function Post({
         <div
           className="comment-button"
           role="button"
+          aria-pressed="false"
+          aria-disabled
+          tabIndex="0"
           onMouseEnter={handleMouseEnterArrowComment}
           onMouseLeave={handleMouseLeaveArrowComment}
+          onFocus={handleMouseEnterArrowComment}
+          onBlur={handleMouseLeaveArrowComment}
           onClick={handleOnClickComment}
+          onKeyPress={handleOnClickComment}
           data-testid="comment-button"
           style={styleComment}
         >

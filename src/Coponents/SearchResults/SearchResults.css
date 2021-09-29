@@ -1,0 +1,7 @@
+.search-results {
+  border-radius: 3px;
+  /* background-color: #ecf1f1; */
+  position: absolute;
+  top: 63px;
+  width: 300px;
+}

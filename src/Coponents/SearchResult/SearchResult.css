@@ -1,0 +1,22 @@
+.search-result {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-result img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 15px;
+  margin: 0 10px;
+}
+
+.search-result-default {
+  background-color: #ecf1f1;
+}
+.search-result-hovered {
+  background-color: #b7e0f7;
+}

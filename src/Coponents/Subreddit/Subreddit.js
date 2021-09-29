@@ -29,8 +29,15 @@ function Subreddit({
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
       onClick={handleClick}
+      onKeyPress={handleClick}
       data-testid="subreddit"
+      role="button"
+      aria-pressed="false"
+      aria-disabled
+      tabIndex="1"
     >
       <img src={icon} alt="icon" data-testid="icon" />
       <h2>{name}</h2>
