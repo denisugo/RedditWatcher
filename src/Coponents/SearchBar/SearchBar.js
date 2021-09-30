@@ -2,48 +2,62 @@ import React, { useState } from "react";
 import "./SearchBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import icons from "../../assets/subredditsIcons";
 import SearchResults from "../SearchResults/SearchResults";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchSearchResults,
+  selectSearchError,
+  selectSearchLoading,
+  selectSearchResults,
+} from "../../features/SearchSlice/SeacrhSlice";
+import SearchResultsLoader from "../Loaders/SearchResultsLoader/SearchResultsLoader";
+import { fetchPosts } from "../../features/PostsSlice/PostsSlice";
+import { changeSubreddit } from "../../features/SubredditsSlice/SubredditsSlice";
+import subreddits from "../../features/SubredditsSlice/SubredditsData";
 
 function SearchBar(props) {
   // Styling
   const [border, setBorder] = useState("none");
 
-  const onMouseEnterHandler = ({ currentTarget }) => {
-    setBorder("3px solid #706F6F");
+  const onMouseEnterHandler = () => {
+    setBorder("3px solid #E09E43");
   };
-  const onMouseLeaveHandler = ({ currentTarget }) => {
+  const onMouseLeaveHandler = () => {
     setBorder("none");
   };
 
   // Search term logic
-  // Mock results
-  const results = [
-    {
-      id: 0,
-      name: "result-result",
-      subscribers: 20,
-      icon: icons.blender,
-    },
-    {
-      id: 1,
-      name: "result-result",
-      subscribers: 20,
-      icon: icons.art,
-    },
-    {
-      id: 2,
-      name: "result-result",
-      subscribers: 20,
-      icon: icons.news,
-    },
-  ];
+  // Load results
+  const searchResults = useSelector(selectSearchResults);
+  const loading = useSelector(selectSearchLoading);
+  const error = useSelector(selectSearchError);
+
+  const dispatch = useDispatch();
+
+  const [term, setTerm] = useState("");
+
+  const handleChange = ({ target }) => {
+    setTerm(target.value);
+    // await new Promise((resolve) => setImmediate(resolve));
+    dispatch(fetchSearchResults(target.value));
+  };
+
   const [resultsVisible, setResultsVisible] = useState(false);
-  const handleClick = () => {
+
+  const handleFocus = (e) => {
     setResultsVisible(true);
   };
-  const handleBlur = () => {
+  const handleBlur = (e) => {
     setResultsVisible(false);
+  };
+
+  // Select search result
+  const handleSelect = (subreddit) => {
+    dispatch(fetchPosts(subreddit));
+    dispatch(changeSubreddit(subreddit));
+    setResultsVisible(false);
+    setBorder("none");
+    setTerm("");
   };
   return (
     <div
@@ -53,18 +67,40 @@ function SearchBar(props) {
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
       tabIndex="0"
-      onFocus={handleClick}
       onBlur={handleBlur}
+      onFocus={handleFocus}
     >
       <FontAwesomeIcon icon={faSearch} size={"2x"} color="#706F6F" />
+
       <input
         data-testid="search-input"
         type="search"
         name="term"
         placeholder="Search"
+        autoComplete="off"
         role="search"
+        value={term}
+        onChange={handleChange}
       />
-      {resultsVisible && <SearchResults searchResults={results} />}
+
+      {!loading && resultsVisible && (
+        <SearchResults searchResults={searchResults} onSelect={handleSelect} />
+      )}
+
+      {resultsVisible && loading && (
+        <div className="mock-search-results" data-testid="mock-search-results">
+          <SearchResultsLoader />
+          <SearchResultsLoader />
+          <SearchResultsLoader />
+          <SearchResultsLoader />
+          <SearchResultsLoader />
+        </div>
+      )}
+      {resultsVisible && error && (
+        <div className="search-error" data-testid="search-error">
+          <em>Unable to load results</em>
+        </div>
+      )}
     </div>
   );
 }

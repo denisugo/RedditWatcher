@@ -5,14 +5,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #b7e0f7;
+  background-color: #fff;
   border-radius: 3px;
   box-sizing: border-box;
   border: none;
 }
 
 input {
-  background-color: #b7e0f7;
+  background-color: #fff;
   width: 200px;
   height: 40px;
   padding: 0;
@@ -28,4 +28,25 @@ input:focus {
 
 ::placeholder {
   color: #706f6f;
+}
+
+.search-error {
+  border-radius: 3px;
+  background-color: #ecf1f1;
+  padding: 10px 0;
+  position: absolute;
+  top: 63px;
+  width: 300px;
+}
+
+.search-error em {
+  color: #706f6f;
+}
+
+.mock-search-results {
+  border-radius: 3px;
+  background-color: #ecf1f1;
+  position: absolute;
+  top: 63px;
+  width: 300px;
 }

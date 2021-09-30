@@ -29,29 +29,41 @@ describe("Comments fetching", () => {
     },
   ];
 
-  let wrapper;
-
-  beforeEach(() => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: () => [{}, { data: { children: output } }],
-    });
-
-    wrapper = setUpRedux(Comments, { url: url, id: id });
-  });
-
   afterEach(() => {
     fetch.resetMocks();
   });
 
   it("Should fetch comments", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => [{}, { data: { children: output } }],
+    });
+
+    const wrapper = setUpRedux(Comments, { url: url, id: id });
+
+    const mockComments = findByDataTest("mock-comments", wrapper);
+    expect(mockComments.length).toBe(1);
+
     await new Promise((resolve) => setImmediate(resolve));
 
     wrapper.update();
-    // console.log(wrapper.debug());
 
     const element = findByDataTest("comment", wrapper);
 
     expect(element.length).not.toBe(0);
+  });
+
+  it("Should fetch comments", async () => {
+    fetch.mockRejectedValueOnce();
+
+    const wrapper = setUpRedux(Comments, { url: url, id: id });
+
+    await new Promise((resolve) => setImmediate(resolve));
+
+    wrapper.update();
+
+    const error = findByDataTest("comments-error", wrapper);
+
+    expect(error.length).toBe(1);
   });
 });

@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./Coponents/Header/Header";
 import HomePage from "./Containers/HomePage/HomePage";
 import Footer from "./Coponents/Footer/Footer";
+import PostPage from "./Containers/PostPage/PostPage";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Header />
       </header>
       <main>
-        <HomePage />
+        {/* <HomePage /> */}
+        <PostPage />
       </main>
       <footer>
         <Footer />

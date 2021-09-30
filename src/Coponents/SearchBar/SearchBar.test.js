@@ -39,7 +39,7 @@ describe("SearchBar", () => {
       element.simulate("mouseenter");
       element = findByDataTest("search-bar", wrapper);
       let style = element.prop("style");
-      expect(style).toHaveProperty("border", "3px solid #706F6F");
+      expect(style).toHaveProperty("border", "3px solid #E09E43");
 
       element.simulate("mouseleave");
       element = findByDataTest("search-bar", wrapper);
@@ -49,22 +49,72 @@ describe("SearchBar", () => {
   });
 
   describe("Search result logic", () => {
-    let wrapper;
-    let element;
-    beforeEach(() => {
-      wrapper = setUpRedux(SearchBar);
-      element = findByDataTest("search-bar", wrapper);
-    });
+    describe("Fetching search results", () => {
+      const output = [
+        {
+          data: {
+            id: 1,
+            icon_img: null,
+            display_name_prefixed: "mock",
+          },
+        },
+        {
+          data: {
+            id: 2,
+            icon_img: null,
+            display_name_prefixed: "mock",
+          },
+        },
+      ];
 
-    it("Should render search resuslts after clicking and stop rendering aftre blur", () => {
-      let searchResults = findByDataTest("search-results", wrapper);
-      element.simulate("focus");
-      searchResults = findByDataTest("search-results", wrapper);
-      expect(searchResults.length).toBe(1);
+      afterEach(() => {
+        fetch.resetMocks();
+      });
 
-      element.simulate("blur");
-      searchResults = findByDataTest("search-results", wrapper);
-      expect(searchResults.length).toBe(0);
+      it("Should render search resuslts after focus and change", async () => {
+        fetch.mockResolvedValueOnce({
+          ok: true,
+          json: () => ({ data: { children: output } }),
+        });
+
+        const wrapper = setUpRedux(SearchBar);
+        const element = findByDataTest("search-bar", wrapper);
+
+        element.simulate("focus");
+        element
+          .find("input")
+          .simulate("change", { target: { name: "term", value: "art" } });
+
+        const mockSearchResults = findByDataTest(
+          "mock-search-results",
+          wrapper
+        );
+        expect(mockSearchResults.length).toBe(1);
+
+        await new Promise((resolve) => setImmediate(resolve));
+        wrapper.update();
+
+        const searchResults = findByDataTest("search-results", wrapper);
+        expect(searchResults.length).toBe(1);
+      });
+
+      it("Should render error message", async () => {
+        fetch.mockRejectedValueOnce();
+
+        const wrapper = setUpRedux(SearchBar);
+        const element = findByDataTest("search-bar", wrapper);
+
+        element.simulate("focus");
+        element
+          .find("input")
+          .simulate("change", { target: { name: "term", value: "art" } });
+
+        await new Promise((resolve) => setImmediate(resolve));
+        wrapper.update();
+
+        const error = findByDataTest("search-error", wrapper);
+        expect(error.length).toBe(1);
+      });
     });
   });
 });

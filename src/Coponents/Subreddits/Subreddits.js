@@ -6,7 +6,9 @@ import Subreddit from "../Subreddit/Subreddit";
 function Subreddits({ subreddits, selectedSubreddit, setSelectedSubreddit }) {
   return (
     <div className="subreddits" data-testid="subreddits">
+      <div className="subreddits-title-background"></div>
       <h2 className="subreddits-title">Subreddits</h2>
+
       {subreddits.map((subreddit) => {
         let selected = false;
         if (selectedSubreddit === subreddit.subreddit) selected = true;

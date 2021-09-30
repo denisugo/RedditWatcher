@@ -37,16 +37,16 @@ function HomePage(props) {
 
   return (
     <div className="homepage" data-testid="homepage">
+      <Subreddits
+        subreddits={subreddits}
+        selectedSubreddit={selectedSubreddit}
+        setSelectedSubreddit={setSelectedSubreddit}
+      />
       <Posts
         data-testid="posts"
         isLoading={isLoadingPosts}
         isError={isErrorPosts}
         posts={posts}
-      />
-      <Subreddits
-        subreddits={subreddits}
-        selectedSubreddit={selectedSubreddit}
-        setSelectedSubreddit={setSelectedSubreddit}
       />
     </div>
   );

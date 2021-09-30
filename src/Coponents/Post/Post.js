@@ -7,15 +7,20 @@ import { faCommentAlt } from "@fortawesome/free-regular-svg-icons";
 import "./Post.css";
 import Comments from "../Comments/Comments";
 import { fixUrl, getDate } from "../../utils/utils";
-import { useDispatch } from "react-redux";
-import { deleteComments } from "../../features/CommentsSlice/CommentsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteComments,
+  fetchComments,
+  selectComments,
+  selectCommentsLoading,
+} from "../../features/CommentsSlice/CommentsSlice";
 
 function Post({
   user,
   date,
   upvotes,
   subreddit,
-  comments,
+  numOfComments,
   text,
   title,
   images,
@@ -58,11 +63,12 @@ function Post({
   const handleMouseLeaveArrowComment = () =>
     setStyleComment({ color: "#706F6F", backgroundColor: null });
 
-  // Handle clicks
+  // Handle clicks comments
   const [showComments, setShowComments] = useState(false);
   const dispatch = useDispatch();
 
-  const handleOnClickComment = () => {
+  // Comments visibility
+  const handleClickComment = () => {
     if (showComments) {
       dispatch(deleteComments(id));
       setShowComments(false);
@@ -129,13 +135,13 @@ function Post({
           onMouseLeave={handleMouseLeaveArrowComment}
           onFocus={handleMouseEnterArrowComment}
           onBlur={handleMouseLeaveArrowComment}
-          onClick={handleOnClickComment}
-          onKeyPress={handleOnClickComment}
+          onClick={handleClickComment}
+          onKeyPress={handleClickComment}
           data-testid="comment-button"
           style={styleComment}
         >
           <FontAwesomeIcon icon={faCommentAlt} size={"1x"} />
-          <p>{comments}</p>
+          <p>{numOfComments}</p>
         </div>
       </div>
       {showComments && (

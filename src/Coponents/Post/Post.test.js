@@ -146,7 +146,7 @@ describe("Post, passing parameters", () => {
       text: post.text,
       images: post.images,
       upvotes: post.upvotes,
-      comments: post.comments,
+      numOfComments: post.comments,
       subreddit: post.subreddit,
     });
 
@@ -173,7 +173,7 @@ describe("Post, passing parameters", () => {
       text: post.text,
       images: post.twoImages,
       upvotes: post.upvotes,
-      comments: post.comments,
+      numOfComments: post.comments,
       subreddit: post.subreddit,
     });
 
@@ -193,7 +193,7 @@ describe("Post, passing parameters", () => {
       text: post.text,
       images: null,
       upvotes: post.upvotes,
-      comments: post.comments,
+      numOfComments: post.comments,
       subreddit: post.subreddit,
     });
 
@@ -219,7 +219,7 @@ describe("Post, passing parameters", () => {
       text: post.text,
       images: null,
       upvotes: post.upvotes,
-      comments: post.comments,
+      numOfComments: post.comments,
       subreddit: post.subreddit,
       video: post.video,
     });

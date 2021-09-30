@@ -5,6 +5,7 @@ import "./Comments.css";
 import {
   fetchComments,
   selectComments,
+  selectCommentsError,
   selectCommentsLoading,
 } from "../../features/CommentsSlice/CommentsSlice";
 import Comment from "../Comment/Comment";
@@ -18,7 +19,9 @@ function Comments({ url, id }) {
     dispatch(fetchComments({ url, id }));
   }, [dispatch, url, id]);
 
-  const isLoading = useSelector(selectCommentsLoading);
+  const loading = useSelector(selectCommentsLoading);
+  const error = useSelector(selectCommentsError);
+
   return (
     <div className="comments" data-testid="comments">
       {comments &&
@@ -34,11 +37,16 @@ function Comments({ url, id }) {
             );
           return null;
         })}
-      {isLoading && (
-        <div className="loader" data-testid="loader">
+      {loading && (
+        <div className="mock-comments" data-testid="mock-comments">
           <CommentsLoader />
           <CommentsLoader />
           <CommentsLoader />
+        </div>
+      )}
+      {error && (
+        <div className="comments-error" data-testid="comments-error">
+          <h3>Cannot load comments</h3>
         </div>
       )}
     </div>

@@ -5,6 +5,7 @@ import postsSlice from "../features/PostsSlice/PostsSlice";
 import commentsSlice from "../features/CommentsSlice/CommentsSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import subredditsSlice from "../features/SubredditsSlice/SubredditsSlice";
+import seacrhSlice from "../features/SearchSlice/SeacrhSlice";
 
 export const setUp = (Component, props) => {
   const wrapper = shallow(<Component {...props} />);
@@ -16,6 +17,7 @@ export const setUpRedux = (Component, props) => {
       posts: postsSlice,
       comments: commentsSlice,
       subreddits: subredditsSlice,
+      search: seacrhSlice,
     },
   });
 

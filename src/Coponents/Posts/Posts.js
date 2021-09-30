@@ -38,7 +38,7 @@ function Posts({ isLoading, posts, isError }) {
             images={images}
             video={video}
             upvotes={post.data.ups}
-            comments={post.data.num_comments}
+            numOfComments={post.data.num_comments}
             permalink={post.data.permalink}
           />
         );

@@ -65,8 +65,8 @@ describe("PostsSlice", () => {
       fetch.mockRejectedValueOnce({});
 
       await store.dispatch(fetchPosts(subreddit));
-      const posts = selectPosts(store.getState());
-      expect(JSON.stringify(posts)).toBe(JSON.stringify([]));
+      const error = selectPostsError(store.getState());
+      expect(error).toBe(true);
     });
   });
 });

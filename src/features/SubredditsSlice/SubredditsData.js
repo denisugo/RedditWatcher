@@ -1,6 +1,6 @@
 import icons from "../../assets/subredditsIcons";
 
-const subbreddits = [
+const subreddits = [
   {
     name: "home",
     subreddit: "r/popular",
@@ -9,7 +9,7 @@ const subbreddits = [
   },
   {
     name: "Art",
-    subreddit: "r/art",
+    subreddit: "r/Art",
     icon: icons.art,
     id: 1,
   },
@@ -21,7 +21,7 @@ const subbreddits = [
   },
   {
     name: "BikiniBottomTwitter",
-    subreddit: "r/bikinibottomtwitter",
+    subreddit: "r/BikiniBottomTwitter",
     icon: icons.bikiniBottomTwitter,
     id: 3,
   },
@@ -33,7 +33,7 @@ const subbreddits = [
   },
   {
     name: "MemeEconomy",
-    subreddit: "r/memeeconomy",
+    subreddit: "r/MemeEconomy",
     icon: icons.memeEconomy,
     id: 5,
   },
@@ -45,7 +45,7 @@ const subbreddits = [
   },
   {
     name: "TooAfraidToAsk",
-    subreddit: "r/tooafraidtoask",
+    subreddit: "r/TooAfraidToAsk",
     icon: icons.tooAfraidToAsk,
     id: 7,
   },
@@ -57,4 +57,4 @@ const subbreddits = [
   },
 ];
 
-export default subbreddits;
+export default subreddits;
