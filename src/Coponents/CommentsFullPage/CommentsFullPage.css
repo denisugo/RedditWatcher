@@ -1,0 +1,59 @@
+/* General */
+.comments-fullpage {
+  text-align: left;
+  display: flex;
+  justify-content: center;
+}
+.comment-nest {
+  width: 90%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* align-items: center; */
+  justify-content: center;
+  background-color: #fbfbfb;
+  margin: 5px auto;
+}
+
+/* User name */
+.comments-fullpage .user {
+  color: #2d3fe0;
+  margin: 5px 10px 0;
+  align-self: flex-start;
+}
+
+/* Date */
+.comments-fullpage .date {
+  color: #706f6f;
+  margin: 0 10px 5px 10px;
+  align-self: flex-end;
+}
+
+/* Content */
+.comments-fullpage .content {
+  color: #706f6f;
+  margin: 5px 10px 10px;
+  align-self: flex-start;
+}
+
+/* List settings */
+.comments-fullpage ul {
+  margin: 10px auto;
+  /* margin: 10px 20px; */
+  border-left: 1px solid rgb(189, 189, 189);
+  list-style: none;
+  width: 100%;
+}
+.comments-fullpage > ul {
+  margin: 10px auto;
+  border-left: none;
+  list-style: none;
+  width: 100%;
+}
+.comments-fullpage li {
+  width: 100%;
+  /* margin-left: 10px; */
+  list-style: none;
+}

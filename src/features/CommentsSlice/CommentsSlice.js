@@ -14,10 +14,24 @@ export const fetchComments = createAsyncThunk(
     return { id: id, data: responseJson[1].data.children };
   }
 );
+export const fetchPostWithComments = createAsyncThunk(
+  "comments/fetchPostWithComments",
+  async (url) => {
+    const response = await fetch(`https://www.reddit.com/${url}.json`);
+
+    if (!response.ok) return { post: undefined, comments: undefined };
+    const responseJson = await response.json();
+    return {
+      post: responseJson[0].data.children[0],
+      comments: responseJson[1].data.children,
+    };
+  }
+);
 
 const commentsSlice = createSlice({
   name: "comments",
   initialState: {
+    postWithComments: { post: undefined, comments: undefined },
     comments: {},
     loading: false,
     error: false,
@@ -42,12 +56,31 @@ const commentsSlice = createSlice({
       state.error = true;
       // console.log("Error message: ", action.error.message);
     },
+
+    [fetchPostWithComments.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+    },
+    [fetchPostWithComments.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.postWithComments.post = action.payload.post;
+      state.postWithComments.comments = action.payload.comments;
+    },
+    [fetchPostWithComments.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      // console.log("Error message: ", action.error.message);
+    },
   },
 });
 
 export const selectComments = (state) => state.comments.comments;
 export const selectCommentsLoading = (state) => state.comments.loading;
 export const selectCommentsError = (state) => state.comments.error;
+
+export const selectPostWithComments = (state) =>
+  state.comments.postWithComments;
 
 export const { deleteComments } = commentsSlice.actions;
 export default commentsSlice.reducer;

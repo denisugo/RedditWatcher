@@ -1,4 +1,5 @@
-.post {
+/* General */
+.post-fullpage {
   width: 100%;
   height: auto;
   display: flex;
@@ -10,13 +11,14 @@
 }
 
 /* User name */
-.post h2 {
+.post-fullpage h2 {
   color: #2d3fe0;
-  margin: 5px 10px;
+  margin: 10px 10px 5px;
   align-self: flex-start;
+  text-align: left;
 }
 /* Date */
-.post > p {
+.post-fullpage .date {
   margin: 0 10px;
   align-self: flex-start;
   color: #706f6f;
@@ -24,7 +26,7 @@
 }
 
 /* Description */
-.post-content {
+.post-fullpage-content {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -32,10 +34,9 @@
   align-items: center;
   margin: 10px 0 0 0;
 }
-
 /* Post content */
-.post-content h3,
-.post-content h4 {
+.post-fullpage-content h3,
+.post-fullpage-content h4 {
   margin: 0;
   align-self: flex-start;
   margin: 5px;
@@ -43,21 +44,19 @@
   word-wrap: break-word;
   word-break: break-word;
 }
-
-.post-content img,
-.post-content video {
+.post-fullpage-content img,
+.post-fullpage-content video {
   width: 100%;
   height: auto;
   object-fit: contain;
 }
-
-.post-content hr {
+.post-fullpage-content hr {
   width: 100%;
   margin: 10px 0;
 }
 
 /* Up down comment control panel */
-.post .up-down-comment {
+.post-fullpage .up-down-comment {
   display: flex;
   width: 90%;
   height: 20px;
@@ -65,15 +64,15 @@
   justify-content: space-between;
   margin-bottom: 10px;
 }
-
-.post .up-down-comment .arrows {
+.post-fullpage .up-down-comment .arrows {
   display: flex;
   align-items: center;
   width: auto;
   height: auto;
   margin-left: 10px;
 }
-.post .up-down-comment .comment-button {
+.post-fullpage .up-down-comment .mock-comment-button {
+  color: #706f6f;
   display: flex;
   width: auto;
   height: auto;
@@ -82,18 +81,33 @@
   border-radius: 2px;
 }
 
-.post .up-down-comment p {
+.post-fullpage .up-down-comment p {
   font-size: 0.8rem;
   margin-left: 3px;
+  color: #706f6f;
 }
 
-.post .up-down-comment .arrow-up {
+.post-fullpage .up-down-comment .arrow-up {
   padding: 10px;
   border-radius: 2px;
 }
+.post-fullpage .up-down-comment .arrow-up-default {
+  color: #706f6f;
+}
+.post-fullpage .up-down-comment .arrow-up-hovered {
+  color: #de551f;
+  background-color: #dfdfdf;
+}
 
-.post .up-down-comment .arrow-down {
+.post-fullpage .up-down-comment .arrow-down {
   margin-left: 3px;
   padding: 10px;
   border-radius: 2px;
+}
+.post-fullpage .up-down-comment .arrow-down-default {
+  color: #706f6f;
+}
+.post-fullpage .up-down-comment .arrow-down-hovered {
+  color: #de551f;
+  background-color: #dfdfdf;
 }
