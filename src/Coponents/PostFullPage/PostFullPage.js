@@ -79,8 +79,12 @@ function PostFullPage({ post }) {
             />
           ))}
         {video && (
-          <video loop preload="auto" muted controls data-testid="video">
-            <source src={video} data-testid="video-source" type={type} />
+          <video loop preload="metadata" muted controls data-testid="video">
+            <source
+              src={video + "#t=0.001"}
+              data-testid="video-source"
+              type={type}
+            />
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}

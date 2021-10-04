@@ -102,13 +102,13 @@ function Post({
         {video && (
           <video
             loop
-            preload="auto"
+            preload="metadata"
             muted
             controls
             data-testid="video"
             onClick={(e) => e.preventDefault()}
           >
-            <source src={video} type={type} />
+            <source src={video + "#t=0.001"} type={type} />
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}
