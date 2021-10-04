@@ -94,7 +94,13 @@ function Post({
             />
           ))}
         {video && (
-          <video loop muted controls data-testid="video">
+          <video
+            loop
+            muted
+            controls
+            data-testid="video"
+            onClick={(e) => e.preventDefault()}
+          >
             <source src={video} />
             Sorry, your browser doesn't support embedded videos.
           </video>
