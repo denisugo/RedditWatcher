@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  changeSubreddit,
   selectSelectedSubreddit,
   selectSubreddits,
 } from "../../features/SubredditsSlice/SubredditsSlice";
@@ -10,8 +9,6 @@ import Subreddit from "../Subreddit/Subreddit";
 import "./SearchBarMobileSubreddits.css";
 
 function SearchBarMobileSubreddits({ onSelect }) {
-  const dispatch = useDispatch();
-
   const subreddits = useSelector(selectSubreddits);
   const selectedSubreddit = useSelector(selectSelectedSubreddit);
 

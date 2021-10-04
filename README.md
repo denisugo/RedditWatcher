@@ -1,6 +1,6 @@
 # Reddit Watcher (The Reddit client portfolio app)
 
-This site is available on this [url]()
+This site is available on this [url](https://redditwatcher.netlify.app)
 
 ## Technologies used
 
@@ -25,12 +25,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![Main page](./src/assets/wireframes/MainPage.png)
 Main page
+&ensp;
+
+&ensp;
 
 ![Main page](./src/assets/wireframes/MobileMainPage.png)
+
 Mobile main page
+&ensp;
+
+&ensp;
 
 ![Main page](./src/assets/wireframes/PostPage.png)
+
 Post page
+&ensp;
+
+&ensp;
 
 ![Main page](./src/assets/wireframes/MobilePostPage.png)
+
 Mobile post page
