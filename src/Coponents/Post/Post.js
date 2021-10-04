@@ -94,7 +94,7 @@ function Post({
             />
           ))}
         {video && (
-          <video loop autoPlay muted controls data-testid="video">
+          <video loop muted controls data-testid="video">
             <source src={video} />
             Sorry, your browser doesn't support embedded videos.
           </video>
