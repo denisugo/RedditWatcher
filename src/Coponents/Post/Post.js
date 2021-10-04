@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faCommentAlt } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
 
 import "./Post.css";
 import Comments from "../Comments/Comments";
@@ -68,7 +69,8 @@ function Post({
   const dispatch = useDispatch();
 
   // Comments visibility
-  const handleClickComment = () => {
+  const handleClickComment = (e) => {
+    e.preventDefault();
     if (showComments) {
       dispatch(deleteComments(id));
       setShowComments(false);
@@ -76,7 +78,7 @@ function Post({
   };
 
   return (
-    <div className="post" data-testid="post">
+    <Link to={permalink} className="post" data-testid="post">
       <h2>{fullName}</h2>
       <p className="date">{date}</p>
       <div className="post-content">
@@ -147,7 +149,7 @@ function Post({
       {showComments && (
         <Comments data-testid="comments" url={permalink} id={id} />
       )}
-    </div>
+    </Link>
   );
 }
 

@@ -14,6 +14,7 @@ import SearchResultsLoader from "../Loaders/SearchResultsLoader/SearchResultsLoa
 import { fetchPosts } from "../../features/PostsSlice/PostsSlice";
 import { changeSubreddit } from "../../features/SubredditsSlice/SubredditsSlice";
 import subreddits from "../../features/SubredditsSlice/SubredditsData";
+import SearchBarMobileSubreddits from "../SearchBarMobileSubreddits/SearchBarMobileSubreddits";
 
 function SearchBar(props) {
   // Styling
@@ -30,7 +31,7 @@ function SearchBar(props) {
   // Load results
   const searchResults = useSelector(selectSearchResults);
   const loading = useSelector(selectSearchLoading);
-  const error = useSelector(selectSearchError);
+  // const error = useSelector(selectSearchError);
 
   const dispatch = useDispatch();
 
@@ -83,6 +84,8 @@ function SearchBar(props) {
         onChange={handleChange}
       />
 
+      {resultsVisible && <SearchBarMobileSubreddits onSelect={handleSelect} />}
+
       {!loading && resultsVisible && (
         <SearchResults searchResults={searchResults} onSelect={handleSelect} />
       )}
@@ -96,11 +99,11 @@ function SearchBar(props) {
           <SearchResultsLoader />
         </div>
       )}
-      {resultsVisible && error && (
+      {/* {resultsVisible && error && (
         <div className="search-error" data-testid="search-error">
           <em>Unable to load results</em>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

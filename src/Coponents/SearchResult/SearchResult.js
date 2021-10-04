@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SearchResult.css";
+import { Link } from "react-router-dom";
 
 function SearchResult({ icon, name, onSelect }) {
   const [style, setStyle] = useState("default");
@@ -8,8 +9,10 @@ function SearchResult({ icon, name, onSelect }) {
   const handleMouseLeave = () => setStyle("default");
 
   return (
-    <div
+    <Link
+      to="/"
       className={`search-result search-result-${style}`}
+      data-testid="search-result"
       role="button"
       tabIndex="0"
       onMouseEnter={handleMouseEnter}
@@ -24,7 +27,7 @@ function SearchResult({ icon, name, onSelect }) {
     >
       <img src={icon} alt="Icon" tabIndex="0" />
       <h3 tabIndex="0">{name}</h3>
-    </div>
+    </Link>
   );
 }
 

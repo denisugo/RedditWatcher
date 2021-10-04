@@ -1,9 +1,10 @@
 .search-result {
   width: 100%;
-  height: 40px;
+  height: fit-content;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  text-decoration: inherit;
 }
 
 .search-result img {
@@ -12,11 +13,13 @@
   object-fit: contain;
   border-radius: 25px;
   border: 2px solid #2b2b2b;
-  margin: 0 10px;
+  margin: 5px 10px;
 }
 
 .search-result h3 {
   color: #2b2b2b;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .search-result-default {

@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { Switch, Route } from "react-router-dom";
 
 import Header from "./Coponents/Header/Header";
 import HomePage from "./Containers/HomePage/HomePage";
@@ -13,8 +14,13 @@ function App() {
         <Header />
       </header>
       <main>
-        {/* <HomePage /> */}
-        <PostPage />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route
+            path="/:prefix/:subreddit/:selector/:id/:title"
+            component={PostPage}
+          />
+        </Switch>
       </main>
       <footer>
         <Footer />

@@ -70,12 +70,14 @@ describe("SearchSlice", () => {
       expect(error).toBe(false);
     });
 
-    it("Should set error to true", async () => {
-      fetch.mockRejectedValueOnce({});
+    // No error state provides
 
-      await store.dispatch(fetchSearchResults(term));
-      const error = selectSearchError(store.getState());
-      expect(error).toBe(true);
-    });
+    // it("Should set error to true", async () => {
+    //   fetch.mockRejectedValueOnce({});
+
+    //   await store.dispatch(fetchSearchResults(term));
+    //   const error = selectSearchError(store.getState());
+    //   expect(error).toBe(true);
+    // });
   });
 });

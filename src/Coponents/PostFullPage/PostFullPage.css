@@ -74,6 +74,8 @@
 .post-fullpage .up-down-comment .mock-comment-button {
   color: #706f6f;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
   margin-right: 10px;

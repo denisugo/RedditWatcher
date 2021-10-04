@@ -64,7 +64,7 @@ describe("Homepage", () => {
         await new Promise((resolve) => setImmediate(resolve));
         wrapper.update();
         const element = findByDataTest("post", wrapper);
-        expect(element.length).toBe(2);
+        expect(element.length).toBe(2 * 3); //Should be * by 3 because of Link (Link + LinkAnchor + a)
       });
     });
 

@@ -15,6 +15,7 @@ import {
   selectSelectedSubreddit,
   selectSubreddits,
 } from "../../features/SubredditsSlice/SubredditsSlice";
+import { deletePostWithComments } from "../../features/CommentsSlice/CommentsSlice";
 
 function HomePage(props) {
   const dispatch = useDispatch();
@@ -30,6 +31,8 @@ function HomePage(props) {
 
   useEffect(() => {
     dispatch(fetchPosts(selectedSubreddit));
+    // It should reset postPage
+    dispatch(deletePostWithComments());
   }, [dispatch, selectedSubreddit]);
 
   const isLoadingPosts = useSelector(selectPostsLoading);

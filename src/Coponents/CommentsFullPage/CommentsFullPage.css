@@ -36,6 +36,8 @@
   color: #706f6f;
   margin: 5px 10px 10px;
   align-self: flex-start;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 /* List settings */
@@ -50,6 +52,7 @@
   margin: 10px auto;
   border-left: none;
   list-style: none;
+  padding: 0;
   width: 100%;
 }
 .comments-fullpage li {

@@ -53,7 +53,7 @@ describe("Comments fetching", () => {
     expect(element.length).not.toBe(0);
   });
 
-  it("Should fetch comments", async () => {
+  it("Should NOT fetch comments", async () => {
     fetch.mockRejectedValueOnce();
 
     const wrapper = setUpRedux(Comments, { url: url, id: id });

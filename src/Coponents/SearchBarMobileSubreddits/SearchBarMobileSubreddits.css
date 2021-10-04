@@ -1,0 +1,32 @@
+.searchbar-subreddit {
+  /* border-radius: 3px; */
+  background-color: #ecf1f1;
+  position: fixed;
+
+  bottom: 0;
+  /* top: 63px; */
+  width: 100%;
+  left: 0;
+  /* width: 300px; */
+  height: fit-content;
+
+  z-index: 10;
+  display: none;
+}
+
+.subreddit-link {
+  text-decoration: none;
+  height: auto;
+  width: auto;
+  margin: 7px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .searchbar-subreddit {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}

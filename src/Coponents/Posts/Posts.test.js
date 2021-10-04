@@ -40,7 +40,7 @@ describe("Posts", () => {
   it("Should render Post components", () => {
     const wrapper = setUpRedux(Posts, { posts: twoPosts, isLoading: false });
     const element = findByDataTest("post", wrapper);
-    expect(element.length).toBe(2);
+    expect(element.length).toBe(2 * 3); //Should be * by 3 because of Link (Link + LinkAnchor + a)
   });
   it("Should render mock posts", () => {
     const wrapper = setUpRedux(Posts, { posts: emptyPosts, isLoading: true });

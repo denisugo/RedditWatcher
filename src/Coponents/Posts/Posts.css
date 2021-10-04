@@ -25,3 +25,12 @@
   font-size: 2rem;
   color: #706f6f;
 }
+
+@media only screen and (max-width: 1000px) {
+  .posts {
+    width: 90%;
+  }
+  .error-message {
+    padding: 20px 0;
+  }
+}

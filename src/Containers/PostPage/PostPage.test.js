@@ -7,6 +7,10 @@ import {
 } from "../../utils/testUtils";
 
 describe("PostPage", () => {
+  const match = {
+    params: { prefix: "r", id: "prt", title: "title", selector: "sec" },
+  };
+
   const output = [
     [
       {
@@ -69,7 +73,7 @@ describe("PostPage", () => {
         { data: { children: output[1] } },
       ],
     });
-    const wrapper = setUpRedux(PostPage);
+    const wrapper = setUpRedux(PostPage, { match });
     const mock = findByDataTest("mock-post-comments", wrapper);
     expect(mock.length).toBe(1);
 
@@ -86,7 +90,7 @@ describe("PostPage", () => {
   it("Should render error message", async () => {
     fetch.mockRejectedValueOnce();
 
-    const wrapper = setUpRedux(PostPage);
+    const wrapper = setUpRedux(PostPage, { match });
     await new Promise((resolve) => setImmediate(resolve));
     wrapper.update();
 

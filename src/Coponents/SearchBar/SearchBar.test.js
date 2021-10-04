@@ -98,23 +98,23 @@ describe("SearchBar", () => {
         expect(searchResults.length).toBe(1);
       });
 
-      it("Should render error message", async () => {
-        fetch.mockRejectedValueOnce();
+      // it("Should render error message", async () => {
+      //   fetch.mockRejectedValueOnce();
 
-        const wrapper = setUpRedux(SearchBar);
-        const element = findByDataTest("search-bar", wrapper);
+      //   const wrapper = setUpRedux(SearchBar);
+      //   const element = findByDataTest("search-bar", wrapper);
 
-        element.simulate("focus");
-        element
-          .find("input")
-          .simulate("change", { target: { name: "term", value: "art" } });
+      //   element.simulate("focus");
+      //   element
+      //     .find("input")
+      //     .simulate("change", { target: { name: "term", value: "art" } });
 
-        await new Promise((resolve) => setImmediate(resolve));
-        wrapper.update();
+      //   await new Promise((resolve) => setImmediate(resolve));
+      //   wrapper.update();
 
-        const error = findByDataTest("search-error", wrapper);
-        expect(error.length).toBe(1);
-      });
+      //   const error = findByDataTest("search-error", wrapper);
+      //   expect(error.length).toBe(1);
+      // });
     });
   });
 });

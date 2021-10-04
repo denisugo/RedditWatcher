@@ -17,7 +17,7 @@ describe("Post", () => {
 
   it("Should render Post", () => {
     const element = findByDataTest("post", wrapper);
-    expect(element.length).toBe(1);
+    expect(element.length).toBe(1 * 3); //Should be * by 3 because of Link (Link + LinkAnchor + a)
   });
 });
 
@@ -106,8 +106,6 @@ describe("Post comments", () => {
   it("Should show up comments when clicking on comment button", () => {
     const button = findByDataTest("comment-button", wrapper).first();
     button.simulate("click");
-    // console.log(wrapper.find("Comments").debug());
-    // const element = wrapper.find("Comments");
     const element = findByDataTest("comments", wrapper);
     expect(element.length).toBe(2); // Should be 2 because of Comments itself and inner <div> with the same test id
   });

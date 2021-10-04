@@ -1,5 +1,6 @@
 import {
   deleteComments,
+  deletePostWithComments,
   fetchComments,
   fetchPostWithComments,
   selectComments,
@@ -146,6 +147,33 @@ describe("Comment Slice", () => {
       await store.dispatch(fetchPostWithComments(url));
       const error = selectCommentsError(store.getState());
       expect(error).toBe(true);
+    });
+  });
+
+  describe("Delete Post with Comments", () => {
+    const output = [["post"], "comment"];
+    const url = "mock.com/url";
+
+    afterEach(() => {
+      fetch.resetMocks();
+    });
+
+    it("Should delete comments", async () => {
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => [
+          { data: { children: output[0] } },
+          { data: { children: output[1] } },
+        ],
+      });
+
+      await store.dispatch(fetchPostWithComments(url));
+      let postWithComments = selectPostWithComments(store.getState());
+      expect(postWithComments.post).not.toBeUndefined();
+
+      store.dispatch(deletePostWithComments());
+      postWithComments = selectPostWithComments(store.getState());
+      expect(postWithComments.post).toBeUndefined();
     });
   });
 });

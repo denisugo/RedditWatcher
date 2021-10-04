@@ -17,7 +17,8 @@ function Subreddit({
   const handleMouseLeave = () => {
     if (!selectedSubreddit) setClassName("default");
   };
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.target.focus();
     setClassName("default");
     setSelectedSubreddit(subreddit);
   };
@@ -40,14 +41,16 @@ function Subreddit({
         onBlur={handleMouseLeave}
         onClick={handleClick}
         onKeyPress={handleClick}
+        onMouseDown={(e) => e.preventDefault()}
+        // onKeyDown={(e) => e.preventDefault()}
         data-testid="subreddit"
         role="button"
         aria-pressed="false"
         aria-disabled
         tabIndex="1"
       >
-        <img src={icon} alt="icon" data-testid="icon" />
-        <h2>{name}</h2>
+        <img src={icon} alt="icon" data-testid="icon" tabIndex="-1" />
+        <h2 tabIndex="-1">{name}</h2>
       </div>
     </div>
   );

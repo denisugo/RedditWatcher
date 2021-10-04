@@ -40,6 +40,10 @@ const commentsSlice = createSlice({
     deleteComments: (state, action) => {
       delete state.comments[action.payload];
     },
+    deletePostWithComments: (state, action) => {
+      delete state.postWithComments.post;
+      delete state.postWithComments.comments;
+    },
   },
   extraReducers: {
     [fetchComments.pending]: (state, action) => {
@@ -82,5 +86,5 @@ export const selectCommentsError = (state) => state.comments.error;
 export const selectPostWithComments = (state) =>
   state.comments.postWithComments;
 
-export const { deleteComments } = commentsSlice.actions;
+export const { deleteComments, deletePostWithComments } = commentsSlice.actions;
 export default commentsSlice.reducer;

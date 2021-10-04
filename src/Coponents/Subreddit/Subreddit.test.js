@@ -18,7 +18,7 @@ describe("Subreddit", () => {
 
   let wrapper;
   beforeEach(() => {
-    wrapper = setUp(Subreddit, sub);
+    wrapper = setUpRedux(Subreddit, sub);
   });
 
   it("Should render Subreddit with all properties", () => {

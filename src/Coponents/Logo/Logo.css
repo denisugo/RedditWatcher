@@ -1,10 +1,10 @@
-img {
+.logo img {
   width: 60px;
   height: 60px;
   object-fit: contain;
 }
 
-span {
+.logo span {
   color: #fff;
 }
 
@@ -15,7 +15,24 @@ span {
   margin: auto 20px;
 }
 
-h1 {
+.logo h1 {
   font-size: 2rem;
   color: #e09e43;
+}
+
+@media only screen and (max-width: 700px) {
+  .logo h1 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 440px) {
+  .logo img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  .logo {
+    margin: auto 0 auto 10px;
+  }
 }

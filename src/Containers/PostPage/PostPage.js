@@ -16,7 +16,17 @@ function PostPage(props) {
   // Fetching logic
 
   const permalink =
-    "/r/todayilearned/comments/pun8wd/til_mexico_was_the_only_country_to_protest_the/";
+    "/" +
+    props.match.params.prefix +
+    "/" +
+    props.match.params.subreddit +
+    "/" +
+    props.match.params.selector +
+    "/" +
+    props.match.params.id +
+    "/" +
+    props.match.params.title +
+    "/";
 
   const dispatch = useDispatch();
 
