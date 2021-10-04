@@ -74,7 +74,7 @@ function PostFullPage({ post }) {
           ))}
         {video && (
           <video loop autoPlay muted controls data-testid="video">
-            <source src={video} data-testid="video-source" />
+            <source src={video} data-testid="video-source" type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}

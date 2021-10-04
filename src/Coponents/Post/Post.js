@@ -101,7 +101,7 @@ function Post({
             data-testid="video"
             onClick={(e) => e.preventDefault()}
           >
-            <source src={video} />
+            <source src={video} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}
