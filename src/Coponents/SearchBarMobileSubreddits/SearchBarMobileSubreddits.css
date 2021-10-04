@@ -1,13 +1,13 @@
 .searchbar-subreddit {
   /* border-radius: 3px; */
   background-color: #ecf1f1;
-  position: fixed;
+  /* position: fixed; */
 
   bottom: 0;
   /* top: 63px; */
-  width: 100%;
-  left: 0;
-  /* width: 300px; */
+  /* width: 100%;
+  left: 0; */
+  width: 300px;
   height: fit-content;
 
   z-index: 10;
@@ -28,5 +28,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+}
+@media only screen and (max-width: 440px) {
+  .searchbar-subreddit {
+    left: 0;
+    width: 100%;
   }
 }

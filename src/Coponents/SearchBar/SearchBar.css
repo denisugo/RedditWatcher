@@ -21,6 +21,49 @@ input {
   margin: auto 10px;
 }
 
+input:focus {
+  border: none;
+  outline: none;
+}
+
+::placeholder {
+  color: #706f6f;
+}
+
+/* .search-error {
+  border-radius: 3px;
+  background-color: #ecf1f1;
+  padding: 10px 0;
+  position: absolute;
+  top: 63px;
+  width: 300px;
+} */
+
+/* .search-error em {
+  color: #706f6f;
+} */
+
+.mock-search-results {
+  border-radius: 3px;
+  background-color: #ecf1f1;
+  position: absolute;
+  top: 63px;
+  width: 300px;
+}
+
+.search-results-and-subreddits {
+  z-index: 10;
+  position: absolute;
+  top: 63px;
+  width: fit-content;
+}
+
+@media only screen and (max-width: 1000px) {
+  .magnifier {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   .search-bar {
     margin-left: 10px;
@@ -31,34 +74,13 @@ input {
   input {
     width: 150px;
   }
-}
 
-input:focus {
-  border: none;
-  outline: none;
-}
+  .mock-search-results {
+    width: 100%;
+    left: 0;
+  }
 
-::placeholder {
-  color: #706f6f;
-}
-
-.search-error {
-  border-radius: 3px;
-  background-color: #ecf1f1;
-  padding: 10px 0;
-  position: absolute;
-  top: 63px;
-  width: 300px;
-}
-
-.search-error em {
-  color: #706f6f;
-}
-
-.mock-search-results {
-  border-radius: 3px;
-  background-color: #ecf1f1;
-  position: absolute;
-  top: 63px;
-  width: 300px;
+  .search-results-and-subreddits {
+    left: 0;
+  }
 }

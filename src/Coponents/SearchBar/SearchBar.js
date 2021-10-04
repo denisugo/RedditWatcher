@@ -71,7 +71,12 @@ function SearchBar(props) {
       onBlur={handleBlur}
       onFocus={handleFocus}
     >
-      <FontAwesomeIcon icon={faSearch} size={"2x"} color="#706F6F" />
+      <FontAwesomeIcon
+        icon={faSearch}
+        size={"2x"}
+        color="#706F6F"
+        className="magnifier"
+      />
 
       <input
         data-testid="search-input"
@@ -83,12 +88,17 @@ function SearchBar(props) {
         value={term}
         onChange={handleChange}
       />
-
-      {resultsVisible && <SearchBarMobileSubreddits onSelect={handleSelect} />}
-
-      {!loading && resultsVisible && (
-        <SearchResults searchResults={searchResults} onSelect={handleSelect} />
-      )}
+      <div className="search-results-and-subreddits">
+        {!loading && resultsVisible && (
+          <SearchResults
+            searchResults={searchResults}
+            onSelect={handleSelect}
+          />
+        )}
+        {!loading && resultsVisible && (
+          <SearchBarMobileSubreddits onSelect={handleSelect} />
+        )}
+      </div>
 
       {resultsVisible && loading && (
         <div className="mock-search-results" data-testid="mock-search-results">
