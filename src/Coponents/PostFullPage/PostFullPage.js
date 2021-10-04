@@ -35,6 +35,12 @@ function PostFullPage({ post }) {
 
   const { images, video } = getImageVideo();
 
+  let type = null;
+  if (video) {
+    if (video.match(/.mp4/i) === ".mp4") type = "video/mp4";
+    if (video.match(/.webm/i) === ".webm") type = "video/webm";
+  }
+
   const user = post.data.author;
   const subreddit = post.data.subreddit_name_prefixed;
   const date = getDate(post.data.created);
@@ -73,8 +79,8 @@ function PostFullPage({ post }) {
             />
           ))}
         {video && (
-          <video loop autoPlay muted controls data-testid="video">
-            <source src={video} data-testid="video-source" type="video/mp4" />
+          <video loop preload="auto" muted controls data-testid="video">
+            <source src={video} data-testid="video-source" type={type} />
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}

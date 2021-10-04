@@ -33,6 +33,12 @@ function Post({
 
   const fullName = `${user} (${subreddit})`;
 
+  let type = null;
+  if (video) {
+    if (video.match(/.mp4/i) === ".mp4") type = "video/mp4";
+    if (video.match(/.webm/i) === ".webm") type = "video/webm";
+  }
+
   // Styling objects
   // Olny handling mouse enter and mouse leave events
 
@@ -96,12 +102,13 @@ function Post({
         {video && (
           <video
             loop
+            preload="auto"
             muted
             controls
             data-testid="video"
             onClick={(e) => e.preventDefault()}
           >
-            <source src={video} type="video/mp4" />
+            <source src={video} type={type} />
             Sorry, your browser doesn't support embedded videos.
           </video>
         )}
